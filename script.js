@@ -60,17 +60,6 @@ let requestAnimationFrame =
   window.webkitRequestAnimationFrame ||
   window.msRequestAnimationFrame;
 
-function createSVGCircles() {
-  const svgWrapper = document.getElementById("svg-animation");
-  const newCircle = document.createElement("circle");
-  newCircle.setAttribute("id", "svg-circle");
-  newCircle.setAttribute("cx", "20");
-  newCircle.setAttribute("cy", "20");
-  newCircle.setAttribute("r", "5");
-  svgWrapper.append(newCircle);
-}
-createSVGCircles();
-
 let svgCircle = document.getElementById("svg-circle");
 let svgCircles = [];
 let randomHue = 180;
@@ -86,8 +75,8 @@ function animageSVG() {
   svgAnimation.style.fill = HSLToHex(randomHue, 100, 50);
 
   posAngle += Math.PI / 100;
-  //svgCircle.setAttribute("cx", 50 + Math.cos(posAngle) * 25);
-  //svgCircle.setAttribute("cy", 50 + Math.sin(posAngle) * 25);
+  svgCircle.setAttribute("cx", 50 + Math.cos(posAngle) * 25);
+  svgCircle.setAttribute("cy", 50 + Math.sin(posAngle) * 25);
 
   requestAnimationFrame(animageSVG);
 }

@@ -37,7 +37,6 @@ a:hover {
 }
 
 .picture {
-  background-color: none;
   align-self: auto;
   flex: 1;
   margin: 10px;
@@ -45,15 +44,16 @@ a:hover {
 
 .image-title {
   color: #eee;
+  background-color: #111;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
-#svg-picture {
-  position: relative;
+.image {
+  background-color: black;
   width: 100%;
-}
-
-#canvas-animation {
-  width: 100%;
+  border-radius: 10px;
 }
 
 .accordion {
