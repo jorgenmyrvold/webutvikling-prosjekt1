@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webutvikling prosjekt 1</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1 id="main-title">Snurrende sirkler</h1>
+    <p>
+      Her kan du se de to flotte kunstverkene av ......
+      <br />
+      Se om du klarer å klikke på sirkelen til venstre mens den beveger seg
+    </p>
+
+    <div class="gallery">
+      <div class="picture">
+        <h2 class="image-title">SVG Title</h2>
+        <svg id="svg-animation" width="100" height="100" viewBox="0 0 100 100">
+          <!--           <circle id="svg-circle" cx="20" cy="20" r="5"></circle>
+ -->
+          <circle id="svg-circle" cx="80" cy="80" r="5"></circle>
+          <!-- <circle id="svg-circle" cx="20" cy="80" r="5"></circle>
+          <circle id="svg-circle" cx="80" cy="20" r="5"></circle> -->
+
+          <!-- <animate
+              attributeName="r"
+              values="2;25;2"
+              dur="5s"
+              repeatCount="indefinite"
+            /> -->
+        </svg>
+      </div>
+      <div class="picture">
+        <h2 class="image-title">Sirkel på et lerret</h2>
+        <canvas id="canvas-animation"></canvas>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <h2 class="accordion-header active">Documentation</h2>
+      <!-- Remove active -->
+      <div class="accordion-content">
+        <div class="docs-container">
+          <h3 class="left-header">CSS & Flexbox</h3>
+          <p class="documentation-content">
+            CSS er brukt gjennomgående på hele siden for å style den. Bruken av
+            CSS er relativt elementær noe grunnet utviklers litt begrensede
+            kompetanse på området, men også at det ikke har vært et spesielt
+            stort behov for noe mer. For å organisere bildene og dokumentasjonen
+            er Flexbox benyttet. Dette ble valgt fremfor Grid fordi det
+            automatiserte en del av arbeidet med å gjøre siden responsiv til
+            ulike skjermstørrelser. For å sikre responsivitet er det brukt
+            media-queries i CSSen for å tilpasse Flexboxene.
+          </p>
+        </div>
+
+        <div class="docs-container">
+          <h3 class="left-header">HTML Canvas & SVG</h3>
+          <p class="documentation-content">Mer tekst</p>
+        </div>
+
+        <div class="docs-container">
+          <h3 class="left-header">jQuery</h3>
+          <p class="documentation-content">
+            På denne siden er jQuery brukt for å velge det klikkbare elementet
+            som viser og skjuler dokumentasjonen. I dette tilfellet er bruken av
+            jQuery svært begrenset, men ettersom det ikke var behov for noen mer
+            kompleks og avansert bruk av biblioteket ble det valgt å holde det
+            enkelt. De eneste funksjonene som ble brukt i forbindelse med jQuery
+            var .click() og .toggleClass() for å manipulere accordion objektet
+            til dokumentasjonen.
+          </p>
+        </div>
+
+        <div class="docs-container">
+          <h3 class="left-header">Testing</h3>
+          <p class="documentation-content">
+            Utviklingen av siden er i hovedsak gjennomført på Chrome. Etter
+            ferdigstilling er siden i tillegg blitt testet på både Safari og
+            Firefox. Animasjonene og interaksjonen med de ser ut til å fungere
+            som det skal, og det samme gjelder knappen for å vise og skjule
+            dokumentasjonen. Tesingen kunne selvsagt vært automatisert og mer
+            grundig, men utifra oppgavens krav så dette ut til å være
+            tilstrekkelig.
+          </p>
+        </div>
+
+        <div class="docs-container">
+          <h3 class="left-header">Kilder</h3>
+          <p class="documentation-content">
+            Hovedsaklig har det vært diverse Youtube videoer og google som har
+            vært kildene til dette prosjektet. Animeringen ved bruk av HTML
+            Canvas er inspirert av
+            <a
+              href="https://www.kirupa.com/html5/creating_simple_html5_canvas_animation.htm"
+              >denne artikkelen</a
+            >
+            og i tillegg er det kopiert en funksjon som konverterer mellom HLS
+            fargerom til Hex fra
+            <a
+              href="https://www.kirupa.com/html5/creating_simple_html5_canvas_animation.htm"
+              >denne siden</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
