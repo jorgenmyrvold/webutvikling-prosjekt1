@@ -50,71 +50,94 @@
     </div>
 
     <div class="accordion">
-      <h2 class="accordion-header active">Documentation</h2>
-      <!-- Remove active -->
+      <h2 class="accordion-header">Documentation</h2>
       <div class="accordion-content">
         <div class="docs-container">
-          <h3 class="left-header">CSS & Flexbox</h3>
+          <h3 class="left-header">CSS Grid & Flexbox</h3>
+          <div class="separator"></div>
           <p class="documentation-content">
-            CSS er brukt gjennomgående på hele siden for å style den. Bruken av
-            CSS er relativt elementær noe grunnet utviklers litt begrensede
-            kompetanse på området, men også at det ikke har vært et spesielt
-            stort behov for noe mer. For å organisere bildene og dokumentasjonen
-            er Flexbox benyttet. Dette ble valgt fremfor Grid fordi det
-            automatiserte en del av arbeidet med å gjøre siden responsiv til
-            ulike skjermstørrelser. For å sikre responsivitet er det brukt
-            media-queries i CSSen for å tilpasse Flexboxene.
+            For denne nettsiden valgte jeg å bruke Flexbox-layout fremfor
+            CSS-grid. Fra før kunne jeg svært lite om webutvikling og jeg valgte
+            å fokusere på kun en av metodene i første omgang. Jeg valgte flexbox
+            da det automatiserte en del slik at siden ble responsiv med minst
+            mulig ekstra kode. Jeg er klar over at det er fullt mulig å gjøre
+            CSS-grid responsivt uten alt for mye innsats også, men til dette
+            prosjektet tok jeg et valg om å fokusere på Flexbox. Flexbox ble
+            brukt til å organisere animasjonene og til å organisere
+            dokumentasjonen. Dokumentasjonen kunne selvsagt også blitt
+            organisert på andre måter, men jeg brukte det som en ekstra mulighet
+            til å lære meg litt med om Flexbox.
           </p>
         </div>
 
         <div class="docs-container">
           <h3 class="left-header">HTML Canvas & SVG</h3>
-          <p class="documentation-content">Mer tekst</p>
+          <p class="documentation-content">
+            HTML Canvas og SVG ble brukt for å tegne opp de to animasjonene.
+            Animasjonen til venstre er SVG og høyre er Canvas. Jeg vektla i stor
+            grad å gjøre animasjonene like og dette begrenset en god del hvor
+            komplekse animasjonene kunne være. Canvas og SVG er to veldig ulike
+            måter å lage animasjoner på og kombinert med at animasjonene skulle
+            være like så ble de relativt enkle. Jeg startet opprinnelig med en
+            litt mer kompleks SVG animasjon, men innså fort begrensningene når
+            jeg skulle prøve å lage samme animasjonen i Canvas. De to er svært
+            ulike verktøy og SVG egner seg godt til å animere litt mer komplekse
+            illustrasjoner som gjerne kan bestå av flere elementer og kurver og
+            farger, mens Canvas gjør det enklere å interaktere med animasjonen.
+            Dette kan for eksempel være svært nyttig til enkelt spilldesign
+            eller for å lage mer interaktive og abstrakte animasjoner.
+            <br />
+            For animasjonen i SVG valgte jeg å bare hardkode en sirkel så kunne
+            jeg animere ulike egenskaper på den. Dette ble i hovedsak gjort på
+            to ulike måter. For å endre radiusen på sirkelen brukte jeg
+            animate-tagen i SVG, mens for å animere sirkelbevegelsen brukte jeg
+            JS da dette krevde litt enkel matematikk. Animasjonen i canvas ble
+            utelukkende gjort i JS og den ble inspirert av kilden som er vist
+            til lengre nede. Canvas animasjonen var også utgangspunktet for å
+            lage SVG animasjonen. Til slutt ble det lagt til en eventListener på
+            begge animasjonene slik at de endret farge til en tilfeldig farge
+            hver gang de ble klikket på.
+          </p>
         </div>
 
         <div class="docs-container">
           <h3 class="left-header">jQuery</h3>
           <p class="documentation-content">
-            På denne siden er jQuery brukt for å velge det klikkbare elementet
-            som viser og skjuler dokumentasjonen. I dette tilfellet er bruken av
-            jQuery svært begrenset, men ettersom det ikke var behov for noen mer
-            kompleks og avansert bruk av biblioteket ble det valgt å holde det
-            enkelt. De eneste funksjonene som ble brukt i forbindelse med jQuery
-            var .click() og .toggleClass() for å manipulere accordion objektet
-            til dokumentasjonen.
+            På denne siden ble jQuery brukt for å velge det klikkbare elementet
+            som viser og skjuler dokumentasjonen. I dette tilfellet var bruken
+            av jQuery svært begrenset, men ettersom det ikke var behov for noen
+            mer kompleks og avansert bruk av biblioteket ble det valgt å holde
+            det enkelt. De eneste funksjonene som ble brukt i forbindelse med
+            jQuery var .click() for å registrere klikk på objektet og
+            .toggleClass() for å manipulere accordion objektet til
+            dokumentasjonen.
           </p>
         </div>
 
         <div class="docs-container">
           <h3 class="left-header">Testing</h3>
           <p class="documentation-content">
-            Utviklingen av siden er i hovedsak gjennomført på Chrome. Etter
-            ferdigstilling er siden i tillegg blitt testet på både Safari og
-            Firefox. Animasjonene og interaksjonen med de ser ut til å fungere
-            som det skal, og det samme gjelder knappen for å vise og skjule
-            dokumentasjonen. Tesingen kunne selvsagt vært automatisert og mer
-            grundig, men utifra oppgavens krav så dette ut til å være
-            tilstrekkelig.
+            Utviklingen av siden ble i hovedsak gjennomført på Chrome. Etter
+            ferdigstilling ble siden i tillegg testet på både Safari og Firefox.
+            I alle nettleserene så animasjonene ut til å fungere som de skulle
+            og de endret også farge når de ble klikket på. Knappen som viser og
+            skjuler dokumentasjonen fungerte også som den skulle. Fordi siden
+            var relativt enkel var det ikke så veldig mye å teste annet enn at
+            alt så greit ut.
           </p>
         </div>
 
         <div class="docs-container">
           <h3 class="left-header">Kilder</h3>
           <p class="documentation-content">
-            Hovedsaklig har det vært diverse Youtube videoer og google som har
-            vært kildene til dette prosjektet. Animeringen ved bruk av HTML
-            Canvas er inspirert av
-            <a
-              href="https://www.kirupa.com/html5/creating_simple_html5_canvas_animation.htm"
-              >denne artikkelen</a
-            >
-            og i tillegg er det kopiert en funksjon som konverterer mellom HLS
-            fargerom til Hex fra
-            <a
-              href="https://www.kirupa.com/html5/creating_simple_html5_canvas_animation.htm"
-              >denne siden</a
-            >
-          </p>
+            Hovedsakelig har det vært diverse Youtube videoer og google som har vært kildene til dette prosjektet. Fra før kunne jeg relativt lite om webutvikling og JS, men har lært mye gjennom googling av ulike tema. 
+            <br />
+            Kilder:
+            <br>
+            <a href="https://www.kirupa.com/html5/creating_simple_html5_canvas_animation.htm">Inspirasjon HTML Canvas</a></li>
+            <br>
+            <a href="https://css-tricks.com/converting-color-spaces-in-javascript/">Konvertering fra HSL til Hex</a></li>
+            </p>
         </div>
       </div>
     </div>

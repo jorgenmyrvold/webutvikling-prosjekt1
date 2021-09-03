@@ -10,7 +10,7 @@ body {
   text-align: center;
 }
 
-#main-title {
+h1 {
   color: #fff;
   font-size: 64px;
   font-weight: bold;
@@ -37,7 +37,6 @@ a:hover {
 }
 
 .picture {
-  align-self: auto;
   flex: 1;
   margin: 10px;
 }
@@ -51,7 +50,7 @@ a:hover {
 }
 
 .image {
-  background-color: black;
+  background-color: #111;
   width: 100%;
   border-radius: 10px;
 }
@@ -61,6 +60,7 @@ a:hover {
   color: #333;
   border-radius: 10px;
   margin: 10px;
+  padding-bottom: 5px;
 }
 
 .accordion-header {
@@ -90,15 +90,13 @@ a:hover {
 
 .docs-container {
   text-align: left;
-  margin: 10px;
-  padding-left: 25px;
-  padding-right: 25px;
+  margin: 30px;
 }
 
 @media (min-width: 600px) {
   .docs-container {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
   }
 }
 
@@ -106,13 +104,10 @@ a:hover {
   flex-basis: 30%;
   font-size: 24px;
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .docs-container > .documentation-content {
-  flex-basis: 70%;
+  flex-basis: 68%;
   color: #333;
-}
-
-#svg-animation {
-  width: 100%;
 }
