@@ -16,11 +16,11 @@
     />
   </head>
   <body>
-    <h1 id="main-title">Snurrende sirkler</h1>
+    <h1 id="main-title">Sprettende sirkler</h1>
     <p>
-      Her kan du se de to flotte kunstverkene av ......
+      Her kan du se de to flotte kunstverkene av Sir(kel) Isaac Newton.
       <br />
-      Se om du klarer å klikke på sirkelen til venstre mens den beveger seg
+      Se om du klarer å klikke på sirkelene mens de beveger seg.
     </p>
 
     <div class="gallery">
@@ -33,8 +33,7 @@
           width="100"
           height="100"
           viewBox="0 0 100 100"
-        >         
-        </svg>
+        ></svg>
       </div>
       <div class="picture">
         <h2 class="image-title">Sirkel på et lerret</h2>
@@ -43,7 +42,7 @@
     </div>
 
     <div class="accordion">
-      <h2 class="accordion-header">Documentation</h2>
+      <h2 class="accordion-header">Dokumentasjon</h2>
       <div class="accordion-content">
         <div class="docs-container">
           <h3 class="left-header">CSS Grid & Flexbox</h3>
@@ -70,26 +69,49 @@
             Animasjonen til venstre er SVG og høyre er Canvas. Jeg vektla i stor
             grad å gjøre animasjonene like og dette begrenset en god del hvor
             komplekse animasjonene kunne være. Canvas og SVG er to veldig ulike
-            måter å lage animasjoner på og kombinert med at animasjonene skulle
+            måter å lage animasjoner på, og kombinert med at animasjonene skulle
             være like så ble de relativt enkle. Jeg startet opprinnelig med en
-            litt mer kompleks SVG animasjon, men innså fort begrensningene når
-            jeg skulle prøve å lage samme animasjonen i Canvas. De to er svært
-            ulike verktøy og SVG egner seg godt til å animere litt mer komplekse
-            illustrasjoner som gjerne kan bestå av flere elementer og kurver og
-            farger, mens Canvas gjør det enklere å interaktere med animasjonen.
-            Dette kan for eksempel være svært nyttig til enkelt spilldesign
-            eller for å lage mer interaktive og abstrakte animasjoner.
+            litt mer kompleks SVG animasjon, men innså fort at det ble en for
+            stor jobb i Canvas. De to er svært ulike verktøy og SVG egner seg
+            godt til å animere litt mer komplekse illustrasjoner som gjerne kan
+            bestå av flere elementer og kurver og farger, mens Canvas gjør det
+            enklere å interaktere med animasjonen. Dette kan for eksempel være
+            svært nyttig til enkelt spilldesign eller for å lage mer interaktive
+            og abstrakte animasjoner.
             <br />
-            For animasjonen i SVG valgte jeg å bare hardkode en sirkel så kunne
-            jeg animere ulike egenskaper på den. Dette ble i hovedsak gjort på
-            to ulike måter. For å endre radiusen på sirkelen brukte jeg
-            animate-tagen i SVG, mens for å animere sirkelbevegelsen brukte jeg
-            JS da dette krevde litt enkel matematikk. Animasjonen i canvas ble
-            utelukkende gjort i JS og den ble inspirert av kilden som er vist
-            til lengre nede. Canvas animasjonen var også utgangspunktet for å
-            lage SVG animasjonen. Til slutt ble det lagt til en eventListener på
-            begge animasjonene slik at de endret farge til en tilfeldig farge
-            hver gang de ble klikket på.
+            <br />
+            Måten jeg har laget animasjonen i SVG kan nok minne litt om slik man
+            skriver kode for å animere i Canvas. Dette har litt med motivet,
+            eller ideen, jeg valgte å illustrere. I HTMLen så er det laget en
+            svg container som blir fylt opp med svg-sirkler av javascript. Jeg
+            tolket det som at dette var innenfor hva som var tillatt da det
+            faktisk blir generert svg objekter som jeg senere manipulerer slik
+            man ellers ville gjort med en hvilket som helst annen “hardkodet”
+            svg illustrasjon. Dette kan man også se enda tydeligere om man
+            inspiserer siden i en nettleser. Først genereres et array av sirkler
+            med id, radius, posisjon og hastighet i funksjonen svgCirclesInit().
+            Disse sirklene blir så lagt til som HTML objekter i funksjonen
+            createSVGCircles() hvor hvert objekt får hver sin eventListener som
+            gjør at sirkelen endrer farge når den klikkes på. Til slutt animeres
+            bevegelsene i animateSVG ved å manipulere atributtene til
+            svg-objektene ved hjelp av .getElementById().
+            <br />
+            <br />
+            For å animere sirklene i canvas brukte jeg mye samme metodikken som
+            i SVG. Sirklene ble først lagt til i et array med de samme
+            atributtene som i SVG, men det ble laget en ny nytt array på grunn
+            av ulike dimensjoner og at jeg ikke ønsket at fargen skulle endre
+            seg i begge animasjonene om man klikket på den ene. Selvsagt kunne
+            dimensjonene vært skalert slik at de ble likere, men i og med at
+            fargene skulle være unike så benyttet jeg likevel to ulike arrays.
+            Sirklene ble tegnet opp ved å iterere gjennom arrayet ved bruk av
+            requestAnimationFrame. For å endre farge på sirklene på
+            canvas-animasjonen registrerte jeg hvor på canvaset det ble klikket
+            og så sjekket om det var en sirkel rundt klikket. Dette betyr også
+            at om det er sirkler over hverandre og man da klikker på flere
+            endrer alle farge. I tillegg er det gjort en forenkling slik at
+            klikkene registreres i kvadratet som omslutter sirkelen. Dette ble
+            gjort for å unngå unødvendig komplekse if-statements.
           </p>
         </div>
 
@@ -112,25 +134,41 @@
           <p class="documentation-content">
             Utviklingen av siden ble i hovedsak gjennomført på Chrome. Etter
             ferdigstilling ble siden i tillegg testet på både Safari og Firefox.
-            I alle nettleserene så animasjonene ut til å fungere som de skulle
-            og de endret også farge når de ble klikket på. Knappen som viser og
-            skjuler dokumentasjonen fungerte også som den skulle. Fordi siden
-            var relativt enkel var det ikke så veldig mye å teste annet enn at
-            alt så greit ut.
+            I alle nettleserne så animasjonene ut til å fungere som de skulle og
+            de endret også farge når de ble klikket på. Knappen som viser og
+            skjuler dokumentasjonen fungerte også som den skulle. I Firefox så
+            animasjonen ut til å lagge noe mer og fonten så litt ulik ut, men
+            det var små problemer og i og med at siden fungerte akkurat slik den
+            skulle på to nettlesere (Chrome og Safari) la jeg ikke med innsats i
+            å optimalisere animasjonene for Firefox. All testingen er gjort på
+            en Mac.
           </p>
         </div>
 
         <div class="docs-container">
           <h3 class="left-header">Kilder</h3>
           <p class="documentation-content">
-            Hovedsakelig har det vært diverse Youtube videoer og google som har vært kildene til dette prosjektet. Fra før kunne jeg relativt lite om webutvikling og JS, men har lært mye gjennom googling av ulike tema. 
+            Hovedsakelig har det vært diverse Youtube videoer og google som har
+            vært kildene til dette prosjektet. Fra før kunne jeg relativt lite
+            om webutvikling og JS, men har lært mye gjennom googling av ulike
+            tema.
             <br />
             Kilder:
-            <br>
-            <a href="https://www.kirupa.com/html5/creating_simple_html5_canvas_animation.htm">Inspirasjon HTML Canvas</a></li>
-            <br>
-            <a href="https://css-tricks.com/converting-color-spaces-in-javascript/">Konvertering fra HSL til Hex</a></li>
-            </p>
+            <br />
+            <a
+              href="https://www.kirupa.com/html5/creating_simple_html5_canvas_animation.htm"
+              >Inspirasjon HTML Canvas</a
+            >
+            <br />
+            <a
+              href="https://css-tricks.com/converting-color-spaces-in-javascript/"
+              >Konvertering fra HSL til Hex</a
+            >
+            <br />
+            <a href="https://stackoverflow.com/a/17130415/10286717"
+              >Registrer klikk på canvas</a
+            >
+          </p>
         </div>
       </div>
     </div>

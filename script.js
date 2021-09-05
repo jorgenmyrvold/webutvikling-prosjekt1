@@ -1,14 +1,6 @@
+// ------------------- Global variables and constants ----------------------- //
 const DT = 0.1; // Speed of circles
-const SVG_HEIGHT_WIDTH = 100;
-const CANVAS_HEIGHT_WIDTH = 1000;
-const CANVAS_CIRCLE_RADIUS = 100;
-const CANVAS_MAX_SPEED = 40;
 const NUM_CIRCLES = 6;
-const SVG_CIRCLE_RADIUS = 5;
-const SVG_MAX_SPEED = 5;
-
-let randomHue = [180, 180, 180, 180, 180];
-let posAngle = 0;
 
 let requestAnimationFrame =
   window.requestAnimationFrame ||
@@ -16,11 +8,13 @@ let requestAnimationFrame =
   window.webkitRequestAnimationFrame ||
   window.msRequestAnimationFrame;
 
+// ---------------------- jQuery -------------------------- //
 // For showing and hiding documentation in accordion using jQuery
 $(".accordion-header").click(function () {
   $(this).toggleClass("active");
 });
 
+// ---------------------- Utilities -------------------------- //
 // From https://css-tricks.com/converting-color-spaces-in-javascript/
 // Utility function to convert from HSL to Hex
 function HSLToHex(h, s, l) {
@@ -72,6 +66,20 @@ function HSLToHex(h, s, l) {
   return "#" + r + g + b;
 }
 
+function collisionWithWall(circle, wallX, wallY) {
+  if (circle.x <= 0 + circle.radius || circle.x >= wallX - circle.radius) {
+    circle.vx = -circle.vx;
+  }
+  if (circle.y <= 0 + circle.radius || circle.y >= wallY - circle.radius) {
+    circle.vy = -circle.vy;
+  }
+}
+
+// ---------------------- SVG script -------------------------- //
+const SVG_HEIGHT_WIDTH = 100;
+const SVG_CIRCLE_RADIUS = 10;
+const SVG_MAX_SPEED = 5;
+
 let svgCircles = [];
 
 function svgCirclesInit(svgCircles) {
@@ -93,7 +101,7 @@ function svgCirclesInit(svgCircles) {
 }
 svgCirclesInit(svgCircles);
 
-function createSVGCircles(item, index, array) {
+function createSVGCircles(item, _index, _array) {
   const svgns = "http://www.w3.org/2000/svg";
   const svgWrapper = document.getElementById("svg-animation");
   const newCircle = document.createElementNS(svgns, "circle");
@@ -104,53 +112,15 @@ function createSVGCircles(item, index, array) {
   newCircle.setAttribute("r", item.radius.toString());
   newCircle.setAttribute("fill", item.fill);
   svgWrapper.append(newCircle);
-}
-svgCircles.forEach(createSVGCircles);
 
-function changeRandomHue(item, index, array) {
   const circle = document.getElementById("svg-circle" + item.id);
   circle.addEventListener("click", function () {
     item.fill = HSLToHex(Math.random() * 360, 100, 50);
   });
 }
-svgCircles.forEach(changeRandomHue);
+svgCircles.forEach(createSVGCircles);
 
-function collisionWithWall(circle, wallX, wallY) {
-  // On the form circle1 = {radius: 20, x: 5, y: 5, vx: 5, vy: 5};
-  if (circle.x <= 0 + circle.radius || circle.x >= wallX - circle.radius) {
-    circle.vx = -circle.vx;
-  }
-
-  if (circle.y <= 0 + circle.radius || circle.y >= wallY - circle.radius) {
-    circle.vy = -circle.vy;
-  }
-}
-
-function collisionDetection(circle1, circle2) {
-  // On the form circle1 = {radius: int, x: int, y: int, ...};
-
-  var dx = circle1.x - circle2.x;
-  var dy = circle1.y - circle2.y;
-  var distance = Math.sqrt(dx * dx + dy * dy);
-
-  if (distance < circle1.radius + circle2.radius) {
-    // collision detected!
-  }
-}
-
-function drawSVGCircles(item, index, array) {
-  let htmlCircle = document.getElementById("svg-circle" + item.id);
-
-  item.x += item.vx * DT;
-  item.y += item.vy * DT;
-
-  htmlCircle.setAttribute("cx", item.x.toString());
-  htmlCircle.setAttribute("cy", item.y.toString());
-  htmlCircle.setAttribute("fill", item.fill);
-}
-svgCircles.forEach(drawSVGCircles);
-
-function animageSVG() {
+function animateSVG() {
   for (let i = 0; i < svgCircles.length; i++) {
     let htmlCircle = document.getElementById("svg-circle" + svgCircles[i].id);
 
@@ -163,11 +133,15 @@ function animageSVG() {
     htmlCircle.setAttribute("cy", svgCircles[i].y.toString());
     htmlCircle.setAttribute("fill", svgCircles[i].fill);
   }
-  requestAnimationFrame(animageSVG);
+  requestAnimationFrame(animateSVG);
 }
-animageSVG();
+animateSVG();
 
-// ---------------------- HTML canvas script --------------------------
+// ---------------------- HTML canvas script -------------------------- //
+const CANVAS_HEIGHT_WIDTH = 1000;
+const CANVAS_CIRCLE_RADIUS = 100;
+const CANVAS_MAX_SPEED = 40;
+
 const canvas = document.getElementById("canvas-animation");
 
 canvas.width = CANVAS_HEIGHT_WIDTH;
@@ -225,10 +199,12 @@ function draw() {
 }
 draw();
 
-function getMousePos(evt) {
-  var rect = canvas.getBoundingClientRect(), // abs. size of element
-    scaleX = canvas.width / rect.width, // relationship bitmap vs. element for X
-    scaleY = canvas.height / rect.height; // relationship bitmap vs. element for Y
+function canvasClickColorChange(evt) {
+  // How to get current mouse position is from
+  // https://stackoverflow.com/a/17130415/10286717
+  let rect = canvas.getBoundingClientRect(),
+    scaleX = canvas.width / rect.width,
+    scaleY = canvas.height / rect.height;
 
   const clickX = (evt.clientX - rect.left) * scaleX;
   const clickY = (evt.clientY - rect.top) * scaleY;
@@ -246,7 +222,7 @@ function getMousePos(evt) {
 }
 
 canvas.addEventListener("click", function (e) {
-  getMousePos(e);
+  canvasClickColorChange(e);
 });
 
 // Scaling SVG to parent
@@ -257,7 +233,6 @@ window.addEventListener("resize", function () {
   svgAnimation.setAttribute("height", w);
 });
 
-// TODO: Check if there is a better way to solve this
 window.onload = function () {
   const svgAnimation = this.document.getElementById("svg-animation");
   const w = svgAnimation.parentElement.clientWidth;
